@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNewIncomeCategory"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:fontFamily=""
+            android:textColor="@color/white"
+            android:src="@drawable/ic_back"
+            android:onClick="back"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="Enter new Income Category: "
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </TextView>
+        <EditText
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:id="@+id/newincomecategory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Category Name"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="Enter Category Income: "
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:id="@+id/newcatincome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Category Income"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="Enter Allocated Budget : "
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:id="@+id/newCatBug"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Category Budget"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addnewincomecat"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Save Records">
+    </Button>
+
+
+
+
+</LinearLayout>

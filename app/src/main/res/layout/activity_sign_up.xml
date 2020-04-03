@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signUp"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:fontFamily=""
+            android:textColor="@color/white"
+            android:src="@drawable/ic_back"
+            android:onClick="back"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Enter your name:">
+
+        </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/signname"
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Name"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Enter your email: ">
+
+        </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:id="@+id/signemail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Email"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Enter a Username:">
+
+        </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:id="@+id/signusername"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Preferred Username"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Enter a password:">
+
+        </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:id="@+id/signuserpassword"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Preferred Password"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="Retype password: ">
+
+    </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:id="@+id/signuserpasswordagain"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Re-enter Password"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/signlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="login"/>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="Already Registered!"/>
+
+        <TextView
+            android:id="@+id/signuseralreadylogin"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:text="Login  " />
+    </LinearLayout>
+
+
+
+</LinearLayout>

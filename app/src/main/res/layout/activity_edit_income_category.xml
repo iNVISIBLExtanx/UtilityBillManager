@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditIncomeCategory"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@null"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:fontFamily=""
+            android:textColor="@color/white"
+            android:src="@drawable/ic_back"
+            android:onClick="back"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:weightSum="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Select Category" />
+
+        <Spinner
+            android:layout_weight="2"
+            android:id="@+id/incomeselcat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Old Income Rs">
+
+        </TextView>
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/oldcategoryincome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </TextView>
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Old Budget Rs">
+
+        </TextView>
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/oldcategorybudget"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New Income Rs">
+
+        </TextView>
+        <EditText
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:id="@+id/newincome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Income ">
+        </EditText>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New Budget Rs">
+
+        </TextView>
+        <EditText
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:id="@+id/newbudget"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:hint="Budget">
+        </EditText>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveeditincomecat"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Save Records">
+
+    </Button>
+
+
+</LinearLayout>
