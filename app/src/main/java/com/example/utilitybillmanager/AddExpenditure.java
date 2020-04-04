@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,8 +51,6 @@ public class AddExpenditure extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //final Category selectedCat = (Category) s.getSelectedItem();
-
                 String entedAmount = e.getText().toString();
                 double amount = Double.parseDouble(entedAmount);
                 int day = picker.getDayOfMonth();
@@ -59,20 +58,21 @@ public class AddExpenditure extends AppCompatActivity {
                 int year = picker.getYear();
                 String note = n.getText().toString();
                 boolean istoday = today(day, month, year);
-                //boolean overBudget = db.overBudget(selectedCat,amount);
+
+                boolean overBudget = db.overBudget(catID, amount);
 
                 if (istoday==true){
                     Toast.makeText(getApplicationContext(),"You cannot set expenditure for today. Go to make a payment tab",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    //if (overBudget == false){
-                        boolean insert = db.insertExpences(amount,day,month,year,catID);
+                     if (overBudget == true) {
+                        boolean insert = db.insertExpences(amount,day,month,year,note,catID);
                         if (insert==true){
                             Toast.makeText(getApplicationContext(),"Record entered successfully",Toast.LENGTH_SHORT).show();
-                        //}
+                        }
                     }
-                    //else
-                       // Toast.makeText(getApplicationContext(), "Entered amount is Over Budgeted to the selected category", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getApplicationContext(), "Entered amount is Over Budgeted to the selected category", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -112,6 +112,7 @@ public class AddExpenditure extends AppCompatActivity {
                 // Here you get the current item (a User object) that is selected by its position
                 Category category = dataAdapter.getItem(position);
                 catID = category.getCatID();
+
                 // Here you can do the action you want to...
             }
 
@@ -122,10 +123,11 @@ public class AddExpenditure extends AppCompatActivity {
 
     }
     public boolean today(int day, int month, int year){
-        Date date = new Date();
-        int day1 = date.getDay();
-        int month1 = date.getMonth();
-        int year1 = date.getYear();
+
+        Calendar cal = Calendar.getInstance();
+        int day1= cal.get(Calendar.DAY_OF_MONTH);
+        int month1= cal.get(Calendar.MONTH);
+        int year1 = cal.get(Calendar.YEAR);
 
         if (day1==day && month1==month && year1==year){
             return true;

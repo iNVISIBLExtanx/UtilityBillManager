@@ -15,12 +15,13 @@ import androidx.annotation.Nullable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context,  "UtilityBillManager.db", null, 3);
+        super(context,  "UtilityBillManager.db", null, 4);
     }
 
     @Override
@@ -28,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table UserDetails(Name text,Email text primary key,userName text,password text)");
         db.execSQL("create table OutgoingCategories(CategoryID  integer primary key autoincrement,Name text,Budget double, Spent double)");
         db.execSQL("create table IncomingCategories(CategoryID  integer primary key autoincrement,Name text,Budget double, Income double)");
-        db.execSQL("create table Expences(ExpencesID integer primary key autoincrement,FullAmount double, PaidAmount double, Day int, Month int, Year int, Liability boolean,CategoryID int,foreign key (CategoryID) references OutgoingCategories(CategoryID))");
+        db.execSQL("create table Expences(ExpencesID integer primary key autoincrement,FullAmount double, PaidAmount double, Day int, Month int, Year int, Liability boolean,Note text,CategoryID int,foreign key (CategoryID) references OutgoingCategories(CategoryID))");
     }
 
     @Override
@@ -68,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public  boolean insertExpences(double FullAmount,int Day,int Month,int Year,int CategoryID){
+    public  boolean insertExpences(double FullAmount,int Day,int Month,int Year,String Note,int CategoryID){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("FullAmount", FullAmount);
@@ -77,6 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("Month", Month);
         contentValues.put("Year", Year);
         contentValues.put("Liability", true);
+        contentValues.put("Note", Note);
         contentValues.put("CategoryID", CategoryID);
         long ins = db.insert("Expences", null, contentValues);
         if (ins == -1)
@@ -144,6 +146,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return payableCatsList;
     }
 
+    private Category cursorToCategory1(Cursor cursor) {
+        Category category = new Category();
+        category.setBudget(cursor.getDouble(2));
+        category.setSpent(cursor.getDouble(3));
+        return category;
+    }
+
+    public boolean overBudget(int Category, double amount) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String quary = "Select * From OutgoingCategories where CategoryID='" + Category + "';";
+        Cursor cursor = db.rawQuery(quary,null);
+        double left = 0;
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Category category = cursorToCategory1(cursor);
+            double buget = category.getBudget();
+            double spent = category.getSpent();
+            left = (buget-spent);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        if (left > amount){
+            return true;
+        }
+        else
+            return false;
+    }
+
+
 
     public ArrayList<String> getAlltheIncomeCats() {
         ArrayList<String> incomelist = new ArrayList<String>();
@@ -161,19 +192,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean overBudget(String selectedCat, double amount){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * FROM OutgoingCategories where Name=?", new String[]{selectedCat});
-            Double budget = cursor.getDouble(cursor.getColumnIndex("Budget"));
-            Double spent = cursor.getDouble(cursor.getColumnIndex("Spent"));
-            Double remaining = (budget-spent);
+    //public boolean overBudget(int CategoryID, double amount){
+       // SQLiteDatabase db = this.getReadableDatabase();
+       // Cursor cursor = db.rawQuery("Select * FROM OutgoingCategories where CategoryID=?", new String[]{CategoryID+""});
+        //    Double budget = cursor.getDouble(cursor.get(("Budget")));
+         //   Double spent = cursor.getDouble(cursor.getColumnIndex(("Spent")));
+          //  Double remaining = (budget-spent);
 
-            if (remaining < amount){
-                return true;
-        }
-            else
-                return false;
-    }
+           // if (remaining < amount){
+             //   return true;
+        //}
+          //  else
+            //    return false;
+    //}
 
 
 
