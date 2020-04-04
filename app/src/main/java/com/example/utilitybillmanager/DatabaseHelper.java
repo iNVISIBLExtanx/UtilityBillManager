@@ -130,13 +130,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Category> getAllthePayableCats() {
         ArrayList<Category> payableCatsList = new ArrayList<Category>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from OutgoingCategories", null);
         payableCatsList.clear();
-        if (cursor.moveToFirst()) {
-            do {
-                Category category = cursorToCategory(cursor);
-                payableCatsList.add(category);
-            } while (cursor.moveToNext());
+        Cursor cursor = db.rawQuery("Select * from OutgoingCategories", null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Category category = cursorToCategory(cursor);
+            payableCatsList.add(category);
+            cursor.moveToNext();
         }
             cursor.close();
 

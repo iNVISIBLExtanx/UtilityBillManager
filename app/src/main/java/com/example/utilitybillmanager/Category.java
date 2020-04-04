@@ -94,6 +94,13 @@ public class Category extends AppCompatActivity {
     private double Budget;
     private double Spent;
 
+    public Category(){
+        this.CategoryID = 0;
+        this.Name = "";
+        this.Budget=0;
+        this.Spent = 0;
+
+    }
     public void setCatID(int ID){
         this.CategoryID = ID;
     }

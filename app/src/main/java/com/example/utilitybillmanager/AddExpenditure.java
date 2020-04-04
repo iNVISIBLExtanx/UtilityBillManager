@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,6 +28,7 @@ public class AddExpenditure extends AppCompatActivity {
     DatePicker picker;
     Button submit;
 
+    int catID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +44,20 @@ public class AddExpenditure extends AppCompatActivity {
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
+        loadSpinnerData();
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadSpinnerData();
-                Category selectedCat = (Category) s.getSelectedItem();
+
+                //final Category selectedCat = (Category) s.getSelectedItem();
+
                 String entedAmount = e.getText().toString();
                 double amount = Double.parseDouble(entedAmount);
                 int day = picker.getDayOfMonth();
                 int month = picker.getMonth();
                 int year = picker.getYear();
                 String note = n.getText().toString();
-                int catID = selectedCat.getCatID();
-
                 boolean istoday = today(day, month, year);
                 //boolean overBudget = db.overBudget(selectedCat,amount);
 
@@ -75,7 +77,6 @@ public class AddExpenditure extends AppCompatActivity {
             }
         });
 
-        loadSpinnerData();
     }
 
     public void back(View view) {
@@ -95,17 +96,31 @@ public class AddExpenditure extends AppCompatActivity {
         // Spinner Drop down elements
         ArrayList<Category> payableCatsList = db.getAllthePayableCats();
         // Creating adapter for spinner
-        ArrayAdapter<Category> dataAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, payableCatsList);
+        final ArrayAdapter<Category> dataAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, payableCatsList);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //int catID = payableCatsListIndexes.get(s.getSelectedItemPosition());
-
         // attaching data adapter to spinner
         s.setAdapter(dataAdapter);
-    }
 
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                // Here you get the current item (a User object) that is selected by its position
+                Category category = dataAdapter.getItem(position);
+                catID = category.getCatID();
+                // Here you can do the action you want to...
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+
+        });
+
+    }
     public boolean today(int day, int month, int year){
         Date date = new Date();
         int day1 = date.getDay();
