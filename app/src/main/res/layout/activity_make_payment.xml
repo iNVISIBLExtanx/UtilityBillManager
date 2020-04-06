@@ -48,6 +48,101 @@
     </LinearLayout>
 
     <LinearLayout
+        android:weightSum="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Upcoming or Overdue payment?">
+        </TextView>
+
+        <Button
+            android:id="@+id/no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="No"
+            android:layout_weight="1">
+
+        </Button>
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="YEs"
+            android:layout_weight="1">
+
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/overdueOupcoming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/loadHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </ListView>
+
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="Enter your Expence ID:">
+                        </TextView>
+                        <EditText
+                            android:inputType="text"
+                            android:id="@+id/expenceID"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:hint="Expence ID ">
+
+                        </EditText>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
         android:weightSum="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,6 +157,7 @@
         </TextView>
 
         <EditText
+            android:inputType="number"
             android:layout_weight="2"
             android:id="@+id/paymentamount"
             android:singleLine="true"

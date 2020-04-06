@@ -86,7 +86,7 @@
             android:id="@+id/newpayablebudget"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:hint="Enter your Preferred new Budget ">
+            android:hint="Enter your new Budget ">
         </EditText>
 
     </LinearLayout>

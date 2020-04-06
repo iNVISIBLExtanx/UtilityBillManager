@@ -111,23 +111,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update("OutgoingCategories", contentValues, "CategoryID"+"=?", new String[] {String.valueOf(catID)} );
 
     }
-    /*public void updateBudget(int catID, double amount){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String quary = "Select * From OutgoingCategories where CategoryID='" + catID + "';";
-        Category category = new Category();
-        double newSpent = 0;
-        Cursor c = db.rawQuery(quary, null);
-        c.moveToFirst();
-        while(!c.isAfterLast()){
-            double spent = category.getSpent();
-            newSpent = spent+amount;
-        }
-        c.close();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("Spent",newSpent);
-        db.update("OutgoingCategories", contentValues, "CategoryID" + "=?", new String[]{String.valueOf(category.getCatID())});
-
-    }*/
 
     public  void insertEvent(int Day,int Month,int Year, String Event){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -147,6 +130,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+    public ArrayList<String> loadOverOrUpcoming(int catID){
+        ArrayList<String> paymenthistory = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String quary = "Select * From Expences where Liability=1 and CategoryID='" + catID + "';";
+        paymenthistory.clear();
+        Cursor cursor = db.rawQuery(quary, null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            paymenthistory.add("ExpenceID : "+cursor.getString(0) +" /Full amount Rs: "+cursor.getString(1) + " /Paid amount Rs: "+cursor.getString(2) + " /Date : "+cursor.getString(3) + " - " + cursor.getString(4)+ " - " + cursor.getString(5) + " /Note : "+cursor.getString(7));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return paymenthistory;
     }
 
     public ArrayList<String> getEvents(int day, int month, int year) {
