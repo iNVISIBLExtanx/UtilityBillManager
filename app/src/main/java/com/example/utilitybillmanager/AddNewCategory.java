@@ -18,7 +18,7 @@ import java.text.ParseException;
 
 public class AddNewCategory extends AppCompatActivity {
 
-    static DatabaseHelper db;
+        static DatabaseHelper db;
     EditText n, b;
     Button save;
 
@@ -37,15 +37,16 @@ public class AddNewCategory extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = n.getText().toString();
-                double budget = Double.valueOf(b.getText().toString());
+                String budget = b.getText().toString();
 
-                if (name.equals("")||budget==0){
+                if (name.equals("")||budget.equals("")){
                     Toast.makeText(getApplicationContext(), "Fields cannot be empty", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    double budget1 = Double.valueOf(budget);
                     boolean iscategory = db.checkCategory(name);
                     if (iscategory == true){
-                        boolean insert = db.insertCategories(name, budget);
+                        boolean insert = db.insertCategories(name, budget1);
                         if (insert==true){
                             Toast.makeText(getApplicationContext(), "Category successfully added", Toast.LENGTH_SHORT).show();
                         }

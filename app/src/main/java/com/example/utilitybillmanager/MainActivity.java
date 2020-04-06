@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity{
     Button lb;
     TextView rnb;
     static DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

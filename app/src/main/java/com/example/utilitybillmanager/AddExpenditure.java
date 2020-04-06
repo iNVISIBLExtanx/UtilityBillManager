@@ -30,6 +30,7 @@ public class AddExpenditure extends AppCompatActivity {
     Button submit;
 
     int catID;
+    String catName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,28 +53,39 @@ public class AddExpenditure extends AppCompatActivity {
             public void onClick(View v) {
 
                 String entedAmount = e.getText().toString();
-                double amount = Double.parseDouble(entedAmount);
                 int day = picker.getDayOfMonth();
                 int month = picker.getMonth();
                 int year = picker.getYear();
                 String note = n.getText().toString();
                 boolean istoday = today(day, month, year);
 
-                boolean overBudget = db.overBudget(catID, amount);
+                if (entedAmount.equals("")||note.equals("")){
+                    Toast.makeText(getApplicationContext(),"Fields cannot be empty",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    double amount = Double.parseDouble(entedAmount);
+                    boolean overBudget = db.overBudget(catID, amount);
 
-                if (istoday==true){
-                    Toast.makeText(getApplicationContext(),"You cannot set expenditure for today. Go to make a payment tab",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                     if (overBudget == true) {
-                        boolean insert = db.insertExpences(amount,day,month,year,note,catID);
-                        if (insert==true){
-                            Toast.makeText(getApplicationContext(),"Record entered successfully",Toast.LENGTH_SHORT).show();
-                        }
+                    if (istoday==true){
+                        Toast.makeText(getApplicationContext(),"You cannot set expenditure for today. Go to make a payment tab",Toast.LENGTH_SHORT).show();
                     }
-                    else
-                        Toast.makeText(getApplicationContext(), "Entered amount is Over Budgeted to the selected category", Toast.LENGTH_SHORT).show();
+                    else{
+                        if (overBudget == true) {
+                            boolean insert = db.insertExpences(amount,day,month,year,note,catID);
+                            db.updateRecord(catID,amount);
+                            if (insert==true){
+                                String eventDetails = "You have to pay " + catName + " " + entedAmount + " Rupees on " + day + ". " + "Further you said " + note + " on that payment!";
+                                db.insertEvent(day,month,year,eventDetails);
+                                Toast.makeText(getApplicationContext(),"Record entered successfully",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else
+                            Toast.makeText(getApplicationContext(), "Entered amount is Over Budgeted to the selected category", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
+
             }
         });
 
@@ -112,6 +124,7 @@ public class AddExpenditure extends AppCompatActivity {
                 // Here you get the current item (a User object) that is selected by its position
                 Category category = dataAdapter.getItem(position);
                 catID = category.getCatID();
+                catName = category.getName();
 
                 // Here you can do the action you want to...
             }

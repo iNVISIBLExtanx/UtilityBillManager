@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
+import android.text.style.UpdateAppearance;
 import android.util.Patterns;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context,  "UtilityBillManager.db", null, 4);
+        super(context,  "UtilityBillManager.db", null, 5);
     }
 
     @Override
@@ -30,14 +31,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table OutgoingCategories(CategoryID  integer primary key autoincrement,Name text,Budget double, Spent double)");
         db.execSQL("create table IncomingCategories(CategoryID  integer primary key autoincrement,Name text,Budget double, Income double)");
         db.execSQL("create table Expences(ExpencesID integer primary key autoincrement,FullAmount double, PaidAmount double, Day int, Month int, Year int, Liability boolean,Note text,CategoryID int,foreign key (CategoryID) references OutgoingCategories(CategoryID))");
+        db.execSQL("create table EventCalendar(EventID integer primary key autoincrement, Day int, Month int, Year int, Event text)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists UserDetails");
-        db.execSQL("drop table if exists  OutgoingCategories");
-        db.execSQL("drop table if exists  IncomingCategories");
+        db.execSQL("drop table if exists OutgoingCategories");
+        db.execSQL("drop table if exists IncomingCategories");
         db.execSQL("drop table if exists Expences");
+        db.execSQL("drop table if exists EventCalendar");
     }
 
 
@@ -67,7 +70,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return true;
     }
-
+    public  boolean insertIncomeCategories(String Name, double Budget, double Income){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Name", Name);
+        contentValues.put("Budget", Budget);
+        contentValues.put("Income", Income);
+        long ins = db.insert("IncomingCategories", null, contentValues);
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
 
     public  boolean insertExpences(double FullAmount,int Day,int Month,int Year,String Note,int CategoryID){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -87,6 +101,70 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    public void updateRecord(int catID, double amount) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        Category category = new Category();
+        double getSpent = category.getSpent();
+        double newSpent = getSpent + amount;
+        contentValues.put("Spent", newSpent);
+        db.update("OutgoingCategories", contentValues, "CategoryID"+"=?", new String[] {String.valueOf(catID)} );
+
+    }
+    /*public void updateBudget(int catID, double amount){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String quary = "Select * From OutgoingCategories where CategoryID='" + catID + "';";
+        Category category = new Category();
+        double newSpent = 0;
+        Cursor c = db.rawQuery(quary, null);
+        c.moveToFirst();
+        while(!c.isAfterLast()){
+            double spent = category.getSpent();
+            newSpent = spent+amount;
+        }
+        c.close();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Spent",newSpent);
+        db.update("OutgoingCategories", contentValues, "CategoryID" + "=?", new String[]{String.valueOf(category.getCatID())});
+
+    }*/
+
+    public  void insertEvent(int Day,int Month,int Year, String Event){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Day", Day);
+        contentValues.put("Month", Month);
+        contentValues.put("Year", Year);
+        contentValues.put("Event", Event);
+        db.insert("EventCalendar", null, contentValues);
+    }
+
+    public boolean checkEvent(int day, int month, int year){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String quary = "Select * From EventCalendar where Day='" + day + "' and Month='" + month +  "' and Year='" + year + "';";
+        Cursor cursor = db.rawQuery(quary, null);
+        if (cursor.getCount()>0)
+            return true;
+        else
+            return false;
+    }
+
+    public ArrayList<String> getEvents(int day, int month, int year) {
+        ArrayList<String> eventList = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        eventList.clear();
+        String quary = "Select * From EventCalendar where Day='" + day + "' and Month='" + month +  "' and Year='" + year + "';";
+
+        Cursor cursor = db.rawQuery(quary, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            eventList.add(cursor.getString(4));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return eventList;
+    }
 
     public boolean checkEmail(String email){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -108,6 +186,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean checkCategory(String category){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("Select * FROM OutgoingCategories where Name=?", new String[]{category});
+        if (cursor.getCount()>0)
+            return false;
+        else
+            return true;
+    }
+    public boolean checkIncomeCategory(String category){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * FROM IncomingCategories where Name=?", new String[]{category});
         if (cursor.getCount()>0)
             return false;
         else
@@ -167,13 +253,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
-        if (left > amount){
+        if (left >= amount){
             return true;
         }
         else
             return false;
     }
-
 
 
     public ArrayList<String> getAlltheIncomeCats() {
@@ -190,22 +275,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return incomelist;
     }
-
-
-    //public boolean overBudget(int CategoryID, double amount){
-       // SQLiteDatabase db = this.getReadableDatabase();
-       // Cursor cursor = db.rawQuery("Select * FROM OutgoingCategories where CategoryID=?", new String[]{CategoryID+""});
-        //    Double budget = cursor.getDouble(cursor.get(("Budget")));
-         //   Double spent = cursor.getDouble(cursor.getColumnIndex(("Spent")));
-          //  Double remaining = (budget-spent);
-
-           // if (remaining < amount){
-             //   return true;
-        //}
-          //  else
-            //    return false;
-    //}
-
 
 
 

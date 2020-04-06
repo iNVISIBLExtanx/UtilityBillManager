@@ -62,6 +62,7 @@
 
         </TextView>
         <EditText
+            android:inputType="number"
             android:layout_weight="1"
             android:singleLine="true"
             android:id="@+id/newcatincome"
@@ -85,6 +86,7 @@
 
         </TextView>
         <EditText
+            android:inputType="number"
             android:layout_weight="1"
             android:singleLine="true"
             android:id="@+id/newCatBug"

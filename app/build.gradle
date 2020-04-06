@@ -36,4 +36,5 @@ dependencies {
     implementation('com.mikepenz:materialdrawer:6.0.8@aar') {
         transitive = true
     }
+
 }
