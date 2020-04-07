@@ -101,15 +101,94 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    public  boolean makePavement(double FullAmount,int Day,int Month,int Year,String Note,int CategoryID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("FullAmount", FullAmount);
+        contentValues.put("PaidAmount", FullAmount);
+        contentValues.put("Day", Day);
+        contentValues.put("Month", Month);
+        contentValues.put("Year", Year);
+        contentValues.put("Liability", false);
+        contentValues.put("Note", Note);
+        contentValues.put("CategoryID", CategoryID);
+        long ins = db.insert("Expences", null, contentValues);
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
+
     public void updateRecord(int catID, double amount) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        Category category = new Category();
-        double getSpent = category.getSpent();
-        double newSpent = getSpent + amount;
+        String quary = "Select * From OutgoingCategories where CategoryID='" + catID + "';";
+        Cursor cursor = db.rawQuery(quary,null);
+        double newSpent = 0;
+        //Category category = new Category();
+        //double getSpent = category.getSpent();
+        //double newSpent = getSpent + amount;
+        //contentValues.put("Spent", newSpent);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            double getSpent = cursor.getDouble(3);
+            newSpent = getSpent+amount;
+            cursor.moveToNext();
+        }
+        cursor.close();
         contentValues.put("Spent", newSpent);
         db.update("OutgoingCategories", contentValues, "CategoryID"+"=?", new String[] {String.valueOf(catID)} );
+    }
 
+    public boolean updateExpence(int expenceID, double amount, int day, int month, int year, String Note) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+//        String quary = "Select * From Expences where ExpencesID='" + expenceID + "';";
+//        Cursor cursor = db.rawQuery(quary,null);
+//        cursor.moveToFirst();
+//        while (!cursor.isAfterLast()){
+//
+//            cursor.moveToNext();
+//        }
+//        cursor.close();
+
+        contentValues.put("PaidAmount", amount);
+        contentValues.put("Day", day);
+        contentValues.put("Month", month);
+        contentValues.put("Year", year);
+        contentValues.put("Note", Note);
+        long ins= db.update("Expences", contentValues, "ExpencesID"+"=?", new String[] {String.valueOf(expenceID)} );
+        if (ins == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean checkLiability(int expenceID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String quary = "Select * From Expences where ExpencesID='" + expenceID + "';";
+        Cursor cursor = db.rawQuery(quary,null);
+        double remaining=0;
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            double fullamount = cursor.getDouble(1);
+            double paidamount = cursor.getDouble(2);
+            remaining = (fullamount-paidamount);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        if (remaining==0){
+            return false;
+        }
+        else
+            return true;
+    }
+
+    public void notLiable (int expenceID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Liability", false);
+        long ins= db.update("Expences", contentValues, "ExpencesID"+"=?", new String[] {String.valueOf(expenceID)} );
     }
 
     public  void insertEvent(int Day,int Month,int Year, String Event){
