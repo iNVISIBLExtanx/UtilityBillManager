@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Designed by Synn Labz"
+        android:text="Designed by iNVISIBLExtanx"
         android:textSize="10dp"
         android:fontFamily="@font/medium"
         android:layout_margin="10dp"

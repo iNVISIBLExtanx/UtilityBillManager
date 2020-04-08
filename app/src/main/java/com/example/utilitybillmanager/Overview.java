@@ -69,8 +69,8 @@ public class Overview extends AppCompatActivity implements Drawer.OnDrawerItemCl
         // navigation menu header
         AccountHeader header = new AccountHeaderBuilder().withActivity(this)
                 .addProfiles(new ProfileDrawerItem()
-                        .withEmail("SynnLabz@gmail.com")
-                        .withName("Synn Labz")
+                        .withEmail("invisible.icompany@gmail.com")
+                        .withName("iNVISIBLExtanx")
                         .withIcon(R.drawable.ic_info))
                 .withSavedInstance(savedInstanceState)
                 .withHeaderBackground(R.drawable.headerback)

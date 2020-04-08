@@ -98,12 +98,6 @@
                     android:importantForAccessibility="no" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ProgressBar
-                android:id="@+id/catremwithall"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addnewpayablecat"
@@ -111,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginEnd="60dp"
-                android:text="ave New Payable Category"
+                android:text="Add New Payable Category"
                 android:fontFamily="@font/medium"
                 android:background="@drawable/button"
                 android:textStyle="bold"

@@ -85,13 +85,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Payable Categories"
+                android:layout_gravity="center"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:fontFamily="@font/medium"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"/>
 
-            <TextView
+            <ListView
                 android:id="@+id/payablecatload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,7 +161,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"/>
 
-                <TextView
+                <ListView
                     android:id="@+id/incomecatload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

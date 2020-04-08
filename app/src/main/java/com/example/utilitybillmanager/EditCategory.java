@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,24 +27,22 @@ public class EditCategory extends AppCompatActivity {
     EditText nb;
     Button save;
 
-
     int catID;
     String catName;
-    double catBudget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_category);
-        db = new DatabaseHelper(this);
 
+        db = new DatabaseHelper(this);
         s = (Spinner) findViewById(R.id.paymentselcat);
         ob = (TextView) findViewById(R.id.oldpayablebudget);
         nb = (EditText) findViewById(R.id.newpayablebudget);
         save = (Button) findViewById(R.id.saveeditpayablecat);
         loadSpinnerData();
 
-        /*save.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String value = nb.getText().toString();
@@ -51,16 +51,12 @@ public class EditCategory extends AppCompatActivity {
                 }
                 else {
                     double newBudget = Double.parseDouble(value);
-                    boolean checkoverBudget = db.overBudget(catID,newBudget);
-                    if (checkoverBudget == true){
-
-                    }
-                    else
-                        Toast.makeText(getApplicationContext(), "Entered amount is Over Budgeted to the selected category", Toast.LENGTH_SHORT).show();
+                    db.updateBudget(catID, newBudget);
+                    Toast.makeText(getApplicationContext(),"Record entered successfully",Toast.LENGTH_SHORT).show();
 
                 }
             }
-        });*/
+        });
 
     }
 
@@ -76,6 +72,8 @@ public class EditCategory extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 
     private void loadSpinnerData() {
         // Spinner Drop down elements
@@ -98,7 +96,6 @@ public class EditCategory extends AppCompatActivity {
                 Category category = dataAdapter.getItem(position);
                 catID = category.getCatID();
                 catName = category.getName();
-                catBudget = category.getBudget();
                 //SQLiteCursor item = (SQLiteCursor) s.getItemAtPosition(position);
                 //String value = String.valueOf(item.getString(0));
                 //ob.setText((int) db.retrieveOldBudget(catBudget));
