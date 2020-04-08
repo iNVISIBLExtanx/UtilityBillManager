@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_dark"
     tools:context=".TrasactionHistory"
     android:orientation="vertical">
 
@@ -18,9 +19,7 @@
             android:id="@+id/backBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/white"
-            android:fontFamily=""
-            android:textColor="@color/white"
+            android:background="@null"
             android:src="@drawable/ic_back"
             android:onClick="back"/>
 
@@ -28,10 +27,11 @@
 
     <TextView
         android:textSize="30dp"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:fontFamily="@font/medium"
+        android:textColor="@color/white"
         android:text="Your trasaction history" />
 
     <TextView

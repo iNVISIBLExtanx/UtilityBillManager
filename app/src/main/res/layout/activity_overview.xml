@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_dark"
     tools:context=".Overview">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/primary_dark"
             android:theme="@style/AppTheme.AppBarOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_dark"
     android:orientation="vertical"
     tools:context=".Charts">
 
@@ -18,9 +19,7 @@
             android:id="@+id/backBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/white"
-            android:fontFamily=""
-            android:textColor="@color/white"
+            android:background="@null"
             android:src="@drawable/ic_back"
             android:onClick="back"/>
 

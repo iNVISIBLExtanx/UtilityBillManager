@@ -337,6 +337,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }
 
+    /*public boolean notExceedingBudget() {
+        double incomeBudget = 0;
+        double outgoingBudget = 0;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String quary = "SELECT i.Budget, o.Budget" + " FROM IncomingCategories i, OutgoingCategories o";
+        Cursor cursor = db.rawQuery(quary,null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            incomeBudget = cursor.getDouble(3) + cursor.getDouble(3);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        String quary2 = "SELECT Budget" + " FROM OutgoingCategories";
+        Cursor cursor2 = db.rawQuery(quary2,null);
+        cursor2.moveToFirst();
+        while (!cursor2.isAfterLast()){
+            outgoingBudget = cursor2.getDouble(3);
+            cursor2.moveToNext();
+        }
+        cursor2.close();
+        if (incomeBudget >= outgoingBudget){
+            return true;
+        }
+        else
+            return false;
+    }*/
 
     public ArrayList<String> getAlltheIncomeCats() {
         ArrayList<String> incomelist = new ArrayList<String>();
@@ -353,6 +381,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return incomelist;
     }
 
+    /*public double retrieveOldBudget(String Name){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from OutgoingCategories where Name=?", new String[]{Name});
+        double budgetValue = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                budgetValue = cursor.getDouble(2);
+            }   while (cursor.moveToNext());
+        }
+        cursor.close();
+        return budgetValue;
+    }*/
 
 
 

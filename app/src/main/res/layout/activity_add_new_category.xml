@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_dark"
     tools:context=".AddNewCategory"
     android:orientation="vertical">
 
@@ -18,74 +19,107 @@
             android:id="@+id/backBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/white"
-            android:fontFamily=""
-            android:textColor="@color/white"
+            android:background="@null"
             android:src="@drawable/ic_back"
             android:onClick="back"/>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:weightSum="2"
+    <RelativeLayout
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_weight="1"
-            android:text="Enter new Payable Category:      "
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
-        </TextView>
-        <EditText
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:id="@+id/newCat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:hint="Category Name"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_weight="1"
-            android:text="Enter Category Budget Rs: "
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
-        </TextView>
-        <EditText
-            android:inputType="number"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:id="@+id/newCatBug"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:hint="Category Budget"/>
-
-    </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/catremwithall"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/addnewpayablecat"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Save New Payable Category">
-    </Button>
+        android:layout_height="wrap_content">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter new Payable Category"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:minHeight="50dp"
+                android:hint="Category Name">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/newCat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/medium"
+                    android:minHeight="50dp"
+                    android:textColor="@color/white"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:importantForAccessibility="no" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Category Budget Rs"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:minHeight="50dp"
+                android:hint="Category Budget">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/newCatBug"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/medium"
+                    android:minHeight="50dp"
+                    android:textColor="@color/white"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:importantForAccessibility="no" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ProgressBar
+                android:id="@+id/catremwithall"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addnewpayablecat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:text="ave New Payable Category"
+                android:fontFamily="@font/medium"
+                android:background="@drawable/button"
+                android:textStyle="bold"
+                android:textColor="#E5E7E9"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

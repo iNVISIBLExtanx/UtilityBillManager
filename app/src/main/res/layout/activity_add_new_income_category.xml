@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_dark"
     tools:context=".AddNewIncomeCategory"
     android:orientation="vertical">
 
@@ -18,92 +19,141 @@
             android:id="@+id/backBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/white"
-            android:fontFamily=""
-            android:textColor="@color/white"
+            android:background="@null"
             android:src="@drawable/ic_back"
             android:onClick="back"/>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:weightSum="2"
+    <RelativeLayout
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_weight="1"
-            android:text="Enter new Income Category: "
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            app:cardCornerRadius="15sp"
+            android:layout_margin="15dp">
 
-        </TextView>
-        <EditText
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:id="@+id/newincomecategory"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:hint="Category Name"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp">
 
-    </LinearLayout>
-    <LinearLayout
-        android:weightSum="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter New Income Category Name:"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
-        <TextView
-            android:layout_weight="1"
-            android:text="Enter Category Income: "
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:minHeight="50dp"
+                android:hint="New Category Name: ">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/newincomecategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/medium"
+                    android:minHeight="50dp"
+                    android:textColor="@color/white"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:importantForAccessibility="no" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </TextView>
-        <EditText
-            android:inputType="number"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:id="@+id/newcatincome"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:hint="Category Income"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Category Income: "
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:minHeight="50dp"
+                android:hint="New Category Income: ">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/newcatincome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/medium"
+                    android:minHeight="50dp"
+                    android:textColor="@color/white"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:importantForAccessibility="no" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:weightSum="2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Allocated Budget : "
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
 
-        <TextView
-            android:layout_weight="1"
-            android:text="Enter Allocated Budget : "
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:minHeight="50dp"
+                android:hint="New Category Budget: ">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/newCatBug"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/medium"
+                    android:minHeight="50dp"
+                    android:textColor="@color/white"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:importantForAccessibility="no" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        </TextView>
-        <EditText
-            android:inputType="number"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:id="@+id/newCatBug"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:hint="Category Budget"/>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/addnewincomecat"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Save Records">
-    </Button>
+            <Button
+                android:id="@+id/addnewincomecat"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:text="Save Records"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:fontFamily="@font/regular"
+                android:textSize="16dp"/>
 
 
+        </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

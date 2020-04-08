@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_dark"
     tools:context=".MakePayment"
     android:orientation="vertical">
 
@@ -18,174 +19,239 @@
             android:id="@+id/backBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/white"
-            android:fontFamily=""
+            android:background="@null"
             android:textColor="@color/white"
             android:src="@drawable/ic_back"
             android:onClick="back"/>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:weightSum="3"
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Select your Category     ">
-        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
 
-        <Spinner
-            android:layout_weight="2"
-            android:id="@+id/paymentselcat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select your Category"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:weightSum="4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Upcoming or Overdue payment?">
-        </TextView>
-
-        <Button
-            android:id="@+id/no"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="No"
-            android:layout_weight="1">
-
-        </Button>
-        <Button
-            android:id="@+id/yes"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="YEs"
-            android:layout_weight="1">
-
-        </Button>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/overdueOupcoming"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="invisible">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
+            <Spinner
+                android:id="@+id/paymentselcat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upcoming or Overdue payment?"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="No"
+                    android:fontFamily="@font/medium"
+                    android:background="@drawable/button"
+                    android:textStyle="bold"
+                    android:textColor="#E5E7E9"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/yes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Yes"
+                    android:fontFamily="@font/medium"
+                    android:background="@drawable/button"
+                    android:textStyle="bold"
+                    android:textColor="#E5E7E9"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/overdueOupcoming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <ListView
+                    android:id="@+id/loadHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
-                    <ListView
-                        android:id="@+id/loadHistory"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    </ListView>
-
-                    <LinearLayout
-                        android:weightSum="2"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:text="Enter your expence ID"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/regular"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_weight="2"/>
 
-                        <TextView
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:text="Enter your Expence ID:">
-                        </TextView>
-                        <EditText
-                            android:inputType="number"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:hint="ID"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/expenceID"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:hint="Expence ID ">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/regular"
+                            android:minHeight="50dp"
+                            android:textColor="@color/black"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:importantForAccessibility="no" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                        </EditText>
-
-                    </LinearLayout>
 
                 </LinearLayout>
+            </LinearLayout>
 
-            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Enter payment amount Rs:"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/medium"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="2"/>
 
-        </FrameLayout>
-
-
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:weightSum="3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Enter Payment amount Rs: ">
-
-        </TextView>
-
-        <EditText
-            android:inputType="number"
-            android:layout_weight="2"
-            android:id="@+id/paymentamount"
-            android:singleLine="true"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:hint="Enter your amount"/>
-    </LinearLayout>
-
-
-    <ProgressBar
-        android:id="@+id/paymentcatrem"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="50dp"
+                    android:hint="Note"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1">
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/paymentamount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/medium"
+                        android:minHeight="50dp"
+                        android:textColor="@color/white"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:importantForAccessibility="no" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:singleLine="true"
-        android:id="@+id/paymentnote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:hint="Enter any note for the above payment" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/makepayconf"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="pay"/>
+            <ProgressBar
+                android:layout_marginTop="15dp"
+                android:id="@+id/paymentcatrem"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter any note for the above payment"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="5dp"
+                android:minHeight="50dp"
+                android:hint="Note">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/paymentnote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/medium"
+                    android:minHeight="50dp"
+                    android:textColor="@color/white"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:importantForAccessibility="no" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/makepayconf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:text="Pay"
+                android:fontFamily="@font/medium"
+                android:background="@drawable/button"
+                android:textStyle="bold"
+                android:textColor="#E5E7E9"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

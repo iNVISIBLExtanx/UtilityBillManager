@@ -46,10 +46,16 @@ public class AddNewCategory extends AppCompatActivity {
                     double budget1 = Double.valueOf(budget);
                     boolean iscategory = db.checkCategory(name);
                     if (iscategory == true){
-                        boolean insert = db.insertCategories(name, budget1);
-                        if (insert==true){
-                            Toast.makeText(getApplicationContext(), "Category successfully added", Toast.LENGTH_SHORT).show();
+                        //boolean checkExceed = db.notExceedingBudget();
+                        //if (checkExceed==true){
+                            boolean insert = db.insertCategories(name, budget1);
+                            if (insert==true){
+                                Toast.makeText(getApplicationContext(), "Category successfully added", Toast.LENGTH_SHORT).show();
+                            //}
                         }
+                        else
+                            Toast.makeText(getApplicationContext(), "Enter amount is Over Budgeted", Toast.LENGTH_SHORT).show();
+
                     }
                     else
                         Toast.makeText(getApplicationContext(), "Category is already taken", Toast.LENGTH_SHORT).show();

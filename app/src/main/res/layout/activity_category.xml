@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primary_dark"
     tools:context=".Category"
     android:orientation="vertical">
 
@@ -18,136 +19,201 @@
             android:id="@+id/backBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@color/white"
-            android:fontFamily=""
-            android:textColor="@color/white"
+            android:background="@null"
             android:src="@drawable/ic_back"
             android:onClick="back"/>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:weightSum="2"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_below="@id/toolbar">
 
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/payablecat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Payable Category"/>
-
-        <Button
-            android:layout_weight="1"
-            android:id="@+id/receivablecat"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="Income Category"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/payablecatview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="invisible">
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Payable Categories: "/>
-
-                <TextView
-                    android:id="@+id/payablecatload"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </TextView>
-
-                <LinearLayout
-                    android:weightSum="2"
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/payablecat"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <Button
-                        android:layout_weight="1"
-                        android:id="@+id/editpayablecat"
-                        android:text="Edit Category"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Payable Category"
+                    android:fontFamily="@font/medium"
+                    android:background="@drawable/button"
+                    android:textStyle="bold"
+                    android:textColor="#E5E7E9"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
 
-                    <Button
-                        android:layout_weight="1"
-                        android:id="@+id/newpayablecat"
-                        android:text="Add new Category"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/receivablecat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Income Category"
+                    android:fontFamily="@font/medium"
+                    android:background="@drawable/button"
+                    android:textStyle="bold"
+                    android:textColor="#E5E7E9"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/payablecatview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payable Categories"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/payablecatload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:fontFamily="@font/medium"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/editpayablecat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Edit Category"
+                    android:fontFamily="@font/medium"
+                    android:background="@drawable/button"
+                    android:textStyle="bold"
+                    android:textColor="#E5E7E9"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/newpayablecat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Add New Category"
+                    android:fontFamily="@font/medium"
+                    android:background="@drawable/button"
+                    android:textStyle="bold"
+                    android:textColor="#E5E7E9"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/incomecatview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="invisible">
+                android:visibility="gone">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Income Categories: "/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Income Categories"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/medium"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
 
                 <TextView
                     android:id="@+id/incomecatload"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </TextView>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/medium"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
 
                 <LinearLayout
-                    android:weightSum="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                    <Button
-                        android:layout_weight="1"
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/editincomecat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:text="Edit Category"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"/>
+                        android:fontFamily="@font/medium"
+                        android:background="@drawable/button"
+                        android:textStyle="bold"
+                        android:textColor="#E5E7E9"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"/>
 
-                    <Button
-                        android:layout_weight="1"
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/newincomecat"
-                        android:text="Add new Category"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Add New Category"
+                        android:fontFamily="@font/medium"
+                        android:background="@drawable/button"
+                        android:textStyle="bold"
+                        android:textColor="#E5E7E9"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"/>
+
                 </LinearLayout>
 
             </LinearLayout>
 
-        </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
-        </FrameLayout>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</RelativeLayout>
