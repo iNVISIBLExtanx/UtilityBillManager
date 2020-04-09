@@ -56,13 +56,13 @@ public class Overview extends AppCompatActivity implements Drawer.OnDrawerItemCl
         List<IDrawerItem> stockyItems = new ArrayList<>();
 
         PrimaryDrawerItem primaryDrawerItem = new PrimaryDrawerItem()
-                .withName("Settings")
+                .withName("Logout")
                 .withTypeface(Typeface.createFromAsset(getAssets(),"bold.ttf"))
                 .withIcon(R.drawable.ic_info)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        Intent intent = new Intent(Overview.this, Overview.class);
+                        Intent intent = new Intent(Overview.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                         return true;
