@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import com.example.utilitybillmanager.model.Category;
 
 public class MakePayment extends AppCompatActivity {
 

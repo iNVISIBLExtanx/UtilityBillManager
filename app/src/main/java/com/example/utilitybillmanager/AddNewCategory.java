@@ -5,16 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 
 public class AddNewCategory extends AppCompatActivity {
 
@@ -66,14 +60,14 @@ public class AddNewCategory extends AppCompatActivity {
     }
 
     public void back(View view) {
-        Intent intent = new Intent(AddNewCategory.this, Category.class);
+        Intent intent = new Intent(AddNewCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AddNewCategory.this, Category.class);
+        Intent intent = new Intent(AddNewCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }

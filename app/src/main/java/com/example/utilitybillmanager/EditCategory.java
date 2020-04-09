@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.utilitybillmanager.model.Category;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,14 +62,14 @@ public class EditCategory extends AppCompatActivity {
     }
 
     public void back(View view) {
-        Intent intent = new Intent(EditCategory.this, Category.class);
+        Intent intent = new Intent(EditCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(EditCategory.this, Category.class);
+        Intent intent = new Intent(EditCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }
@@ -77,7 +78,7 @@ public class EditCategory extends AppCompatActivity {
 
     private void loadSpinnerData() {
         // Spinner Drop down elements
-        ArrayList<Category> payableCatsList = db.getAllthePayableCats();
+        final ArrayList<Category> payableCatsList = db.getAllthePayableCats();
         // Creating adapter for spinner
         final ArrayAdapter<Category> dataAdapter = new ArrayAdapter<Category>(this, android.R.layout.simple_list_item_1, payableCatsList);
 
@@ -93,9 +94,11 @@ public class EditCategory extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
                 // Here you get the current item (a User object) that is selected by its position
-                Category category = dataAdapter.getItem(position);
+                Category category = payableCatsList.get(position);
                 catID = category.getCatID();
                 catName = category.getName();
+                ob.setText(category.getBudget()+"");
+
                 //SQLiteCursor item = (SQLiteCursor) s.getItemAtPosition(position);
                 //String value = String.valueOf(item.getString(0));
                 //ob.setText((int) db.retrieveOldBudget(catBudget));

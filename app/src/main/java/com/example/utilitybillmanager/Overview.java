@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
+
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -21,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Overview extends AppCompatActivity implements Drawer.OnDrawerItemClickListener{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +124,7 @@ public class Overview extends AppCompatActivity implements Drawer.OnDrawerItemCl
             startActivity(intent);
             Toast.makeText(this, "CalenderView", Toast.LENGTH_SHORT).show();
         }else if(position==7){
-            Intent intent = new Intent(Overview.this, Category.class);
+            Intent intent = new Intent(Overview.this, ActCategory.class);
             startActivity(intent);
             Toast.makeText(this, "Category", Toast.LENGTH_SHORT).show();
         }else if(position==8){

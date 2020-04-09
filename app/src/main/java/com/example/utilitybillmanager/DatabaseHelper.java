@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import com.example.utilitybillmanager.model.Category;
+import com.example.utilitybillmanager.model.IncomeCategories;
 
 import androidx.annotation.Nullable;
 
@@ -319,7 +321,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Category category = new Category();
         category.setCatID(cursor.getInt(0));
         category.setName(cursor.getString(1));
+        category.setBudget(cursor.getDouble(2));
         return category;
+    }
+    private IncomeCategories cursorToCategory2(Cursor cursor) {
+        IncomeCategories incomeCategories = new IncomeCategories();
+        incomeCategories.setCatID(cursor.getInt(0));
+        incomeCategories.setName(cursor.getString(1));
+        incomeCategories.setBudget(cursor.getDouble(2));
+        incomeCategories.setIncome(cursor.getDouble(3));
+        return incomeCategories;
     }
 
     public ArrayList<Category> getAllthePayableCats() {
@@ -338,7 +349,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return payableCatsList;
     }
+    public ArrayList<IncomeCategories> getAlltheIncomeCats() {
+        ArrayList<IncomeCategories> incomelist = new ArrayList<IncomeCategories>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        incomelist.clear();
+        Cursor cursor = db.rawQuery("Select * from IncomingCategories", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            IncomeCategories incomeCategories = cursorToCategory2(cursor);
+            incomelist.add(incomeCategories);
+            cursor.moveToNext();
+        }
+        cursor.close();
 
+        return incomelist;
+    }
     private Category cursorToCategory1(Cursor cursor) {
         Category category = new Category();
         category.setBudget(cursor.getDouble(2));
@@ -395,20 +420,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }*/
 
-    public ArrayList<String> getAlltheIncomeCats() {
-        ArrayList<String> incomelist = new ArrayList<String>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("Select * from IncomingCategories", null);
-        incomelist.clear();
-        if (cursor.moveToFirst()) {
-            do {
-                incomelist.add(cursor.getString(1));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
 
-        return incomelist;
-    }
 
     /*public double retrieveOldBudget(int catID){
         SQLiteDatabase db = this.getReadableDatabase();

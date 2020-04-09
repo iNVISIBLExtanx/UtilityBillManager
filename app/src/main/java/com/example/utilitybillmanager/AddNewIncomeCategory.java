@@ -55,14 +55,14 @@ public class AddNewIncomeCategory extends AppCompatActivity {
     }
 
     public void back(View view) {
-        Intent intent = new Intent(AddNewIncomeCategory.this, Category.class);
+        Intent intent = new Intent(AddNewIncomeCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AddNewIncomeCategory.this, Category.class);
+        Intent intent = new Intent(AddNewIncomeCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }

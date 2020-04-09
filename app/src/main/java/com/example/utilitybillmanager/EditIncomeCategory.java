@@ -3,7 +3,6 @@ package com.example.utilitybillmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import com.example.utilitybillmanager.model.IncomeCategories;
+
 
 public class EditIncomeCategory extends AppCompatActivity {
 
@@ -24,7 +25,6 @@ public class EditIncomeCategory extends AppCompatActivity {
     EditText ni,nb;
     Button save;
 
-    int getpos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,24 +60,24 @@ public class EditIncomeCategory extends AppCompatActivity {
     }
 
     public void back(View view) {
-        Intent intent = new Intent(EditIncomeCategory.this, Category.class);
+        Intent intent = new Intent(EditIncomeCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(EditIncomeCategory.this, Category.class);
+        Intent intent = new Intent(EditIncomeCategory.this, ActCategory.class);
         startActivity(intent);
         finish();
     }
 
     private void loadSpinnerData() {
         // Spinner Drop down elements
-        ArrayList<String> lables = db.getAlltheIncomeCats();
+        final ArrayList<IncomeCategories> lables = db.getAlltheIncomeCats();
 
         // Creating adapter for spinner
-        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, lables);
+        final ArrayAdapter<IncomeCategories> dataAdapter = new ArrayAdapter<IncomeCategories>(this, android.R.layout.simple_list_item_1, lables);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -92,6 +92,10 @@ public class EditIncomeCategory extends AppCompatActivity {
                 //String value = String.valueOf(item.getString(0));
                 //getpos = incomelist.getPosition(position);
                 //oi.setText(value);
+                IncomeCategories incomeCategories = lables.get(position);
+                oi.setText(incomeCategories.getIncome()+"");
+                ob.setText(incomeCategories.getBudget()+"");
+
             }
 
             @Override
